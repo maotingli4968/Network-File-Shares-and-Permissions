@@ -1,88 +1,71 @@
+
+
 <p align="center">
-<img width="1155" height="642" alt="image" src="https://github.com/user-attachments/assets/ccf710f0-3658-494d-aca6-fcaea462f1b5" />
->
+  <img src="https://github.com/user-attachments/assets/ccf710f0-3658-494d-aca6-fcaea462f1b5" alt="Network File Shares and Permissions banner" width="900" />
 </p>
 
-<h1>Network File Shares and Permissions</h1>
-This tutorial outlines how to configure file shares and permissions in active directory<br />
+# Network File Shares and Permissions
+This tutorial outlines how to configure file shares and permissions in Active Directory.
 
-
-
-<h2>Environments and Technologies Used</h2>\
-
+## Environments and Technologies Used
 - Microsoft Azure (Virtual Machines / Compute)
 - Remote Desktop Protocol (RDP)
 - Active Directory Domain Services (AD DS)
 - Windows File Sharing
 
-
-<h2>Operating Systems Used </h2>
-
+## Operating Systems Used
 - Windows Server 2022 Datacenter (Domain Controller – DC-1)
 - Windows 10 Pro (Client – Client-1)
 
+## List of Prerequisites
+- Make sure both **DC-1** and **Client-1** are turned on in the Azure Portal.
+- Log into DC-1 using the domain administrator account: **`mydomain.com\jane_admin`**.
+- Log into Client-1 using a regular domain user account: **`mydomain\<someuser>`**.
+- This lab assumes you already have **Active Directory** deployed and working from previous labs.
 
-<h2>List of Prerequisites</h2>
+## Create File Shares with Permissions on DC-1
+- Log into **DC-1** as **`mydomain.com\jane_admin`**.
+- On the **C:\** drive, create four folders:
+  - **read-access**
+  - **write-access**
+  - **no-access**
+  - **accounting**
+- Right-click each folder → **Properties** → **Sharing** → **Advanced Sharing**, then configure:
+  - **read-access** → Group: **Domain Users**, Permission: **Read**
+  - **write-access** → Group: **Domain Users**, Permission: **Read/Write**
+  - **no-access** → Group: **Domain Admins**, Permission: **Read/Write**
+  - **accounting** → leave untouched for now
 
-- Make sure both <b>DC-1</b> and <b>Client-1</b> are turned on in the Azure Portal.
-- Log into <b>DC-1</b> using the domain administrator account: <b>mydomain.com\jane_admin</b>.
-- Log into <b>Client-1</b> using a regular domain user account: <b>mydomain\<someuser></b>.
-- This lab assumes you already have <b>Active Directory</b> deployed and working from previous labs.
-
-
-<h2>Create File Shares with Permissions on DC-1</h2>
-
-
-- Log into <b>DC-1</b> as <b>mydomain.com\jane_admin</b>.
-- On the <b>C:\</b> drive, create four folders:
-  - <b>read-access</b>
-  - <b>write-access</b>
-  - <b>no-access</b>
-  - <b>accounting</b>
-- Right-click each folder → <b>Properties</b> → <b>Sharing</b> → <b>Advanced Sharing</b>, then configure:
-
-  - <b>read-access</b> → Group: <b>Domain Users</b>, Permission: <b>Read</b>
-  - <b>write-access</b> → Group: <b>Domain Users</b>, Permission: <b>Read/Write</b>
-  - <b>no-access</b> → Group: <b>Domain Admins</b>, Permission: <b>Read/Write</b>
-  - <b>accounting</b> → leave untouched for now
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/151303ee-92b0-4588-9c95-ad1425f16c90" alt="Create folder shares" width="800" />
 </p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0c180761-7bab-4a5d-ba23-925691f25bab" alt="Share permissions" width="800" />
 </p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+## Test File Share Access from Client-1
+- Log into Client-1 as a normal domain user (**`mydomain\<someuser>`**).
+- Open the Run dialog (Win + R) and type **`\\dc-1`**.
+- Try accessing each folder:
+  - You should be able to open **read-access** but only read files.
+  - You should be able to open and create files in **write-access**.
+  - You should not be able to access **no-access**.
+- Confirm the observed behavior matches the permissions you set on DC-1.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c2743b23-e35b-4039-87d4-fe584520ba22" alt="Access shares from Client-1" width="800" />
 </p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/163af068-08d5-4dc2-bafe-b2fcabcf8c74" alt="Permissions result" width="800" />
 </p>
-<br />
+
+## Create an ACCOUNTANTS Security Group and Assign Permissions
+- Back on DC-1, open **Active Directory Users and Computers (ADUC)**.
+- Create a new security group called **ACCOUNTANTS**.
+- Return to the **accounting** folder properties and set:
+  - Group: **ACCOUNTANTS**
+  - Permissions: **Read/Write**
+- Log back into Client-1 as **`<someuser>`** and try to access the **accounting** share.
+- It should fail because the user is not yet in the **ACCOUNTANTS** group.
