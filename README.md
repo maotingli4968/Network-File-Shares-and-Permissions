@@ -76,6 +76,36 @@ This tutorial outlines how to configure file shares and permissions in Active Di
 
   <img width="975" height="501" alt="image" src="https://github.com/user-attachments/assets/01f6e98a-2307-4205-8ea7-77dd1ddc5197" />
 
+
+
+   ## Add User to ACCOUNTANTS Group and Retest Access
+
+- While logged into <b>DC-1</b>, add <b>`<someuser>`</b> to the <b>ACCOUNTANTS</b> group in <b>ADUC</b>.
+- Sign out of <b>Client-1</b> and sign back in as <b>`<someuser>`</b>.
+- Try to access the <b>accounting</b> share again.
+- This time, access should succeed because the user is now a group member.
+
+  <img width="623" height="727" alt="image" src="https://github.com/user-attachments/assets/88ab7d1d-35b2-4811-9588-6ef40368b6ac" />
+
+  <img width="434" height="123" alt="image" src="https://github.com/user-attachments/assets/b7af6b97-eee8-4fec-883b-34cf957a38d5" />
+
+  <img width="975" height="270" alt="image" src="https://github.com/user-attachments/assets/9075e4e9-df5a-46e1-8e0d-a25fbe4525d1" />
+
+
+
+  ## Save or Delete VMs
+
+- After testing is complete, you can either keep the VMs available for practice or delete them to save resources.
+- If you intend to continue future labs, it’s recommended to <b>stop</b> rather than <b>delete</b> the VMs.
+
+  <img width="975" height="187" alt="image" src="https://github.com/user-attachments/assets/425a1197-e787-4a60-a5f8-50daba350f81" />
+
+
+
+
+
+
+
   
 
 
