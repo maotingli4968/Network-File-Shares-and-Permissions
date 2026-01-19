@@ -69,3 +69,17 @@ This tutorial outlines how to configure file shares and permissions in Active Di
   - Permissions: **Read/Write**
 - Log back into Client-1 as **`<someuser>`** and try to access the **accounting** share.
 - It should fail because the user is not yet in the **ACCOUNTANTS** group.
+
+  <img width="975" height="703" alt="image" src="https://github.com/user-attachments/assets/5632bc0b-362b-4b37-9b05-86552964cf70" />
+
+  <img width="975" height="722" alt="image" src="https://github.com/user-attachments/assets/b5833d99-6c7a-4648-9ea6-95b5f424a1b0" />
+
+  <img width="975" height="501" alt="image" src="https://github.com/user-attachments/assets/01f6e98a-2307-4205-8ea7-77dd1ddc5197" />
+
+  
+
+
+
+
+
+
